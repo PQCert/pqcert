@@ -48,6 +48,7 @@ After install, `https://localhost` will appear secure in the browser (CA is inst
 | Topic | Document |
 |-------|----------|
 | All docs | [docs/README.md](docs/README.md) |
+| Full index (Let's Encrypt–style) | [docs/DOCS_INDEX.md](docs/DOCS_INDEX.md) |
 | Organization setup (GitHub) | [docs/ORGANIZATION_SETUP.md](docs/ORGANIZATION_SETUP.md) |
 | Contributing | [CONTRIBUTING.md](CONTRIBUTING.md) |
 | Security | [SECURITY.md](SECURITY.md) |

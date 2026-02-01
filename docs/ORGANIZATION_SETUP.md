@@ -71,6 +71,22 @@ Use **Rulesets** → **New branch ruleset** to protect `main`. Suggested values:
 
 After creating the ruleset, under **Require status checks to pass** add the status check name: **CI** (from `.github/workflows/ci.yml`).
 
+### Only the founder can merge
+
+To ensure **only the founder** (e.g. kursat.arslan@outlook.com) can merge into `main`:
+
+1. **Repo permissions**  
+   - Go to the **pqcert** repo → **Settings** → **Collaborators and teams** (or **Manage access**).  
+   - Grant **Maintain** or **Admin** only to the founder’s GitHub account (the one linked to kursat.arslan@outlook.com).  
+   - Do **not** give **Write** or **Maintain** to other users or teams if only the founder should merge.  
+   - Others can contribute via fork + pull request; only the founder will be able to merge those PRs.
+
+2. **Optional: Bypass list**  
+   - In the ruleset, **Bypass list**: leave **empty** if you want every change (including yours) to go through a PR.  
+   - If you want to allow yourself to push directly to `main` in emergencies, add **your user** (or a team that contains only you) to the bypass list. Then only you can bypass “Require a pull request” and push to `main`; others still must use PRs and only you can merge.
+
+Result: only the founder can merge PRs; others can open PRs but cannot merge.
+
 **Alternative (legacy):** If your repo uses **Settings** → **Branches** → **Branch protection rules** instead of Rulesets, create a rule for branch name **main** with “Require a pull request before merging” and “Require status checks to pass” (CI).
 
 ---

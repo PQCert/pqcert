@@ -2,6 +2,8 @@
 
 Create HTTPS (localhost) certificates for local development with PQCert. This page is the index for all documentation.
 
+**Full doc index (Let's Encrypt–style):** [DOCS_INDEX.md](./DOCS_INDEX.md) — Overview, Getting Started, How it works, FAQ, Glossary, Best practices, Revoking, Client/developer info.
+
 ---
 
 ## Install by platform
