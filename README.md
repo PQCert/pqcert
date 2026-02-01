@@ -12,9 +12,9 @@
 
 ---
 
-PQCert ile yerel geliştirme için **HTTPS (localhost)** sertifikalarını tek komutla oluşturun. Root CA ve localhost sertifikası otomatik üretilir; macOS, Windows ve Linux desteklenir.
+Create **HTTPS (localhost)** certificates for local development with a single command. Root CA and localhost certificate are generated automatically; macOS, Windows, and Linux are supported. **Everyone** is welcome to use, contribute to, and improve PQCert.
 
-## Hızlı kurulum
+## Quick install
 
 **macOS / Linux:**
 
@@ -22,74 +22,74 @@ PQCert ile yerel geliştirme için **HTTPS (localhost)** sertifikalarını tek k
 curl -sSL https://raw.githubusercontent.com/PQCert/pqcert/main/install.sh | bash
 ```
 
-**Windows:** [docs/INSTALL-WINDOWS.md](docs/INSTALL-WINDOWS.md) — WSL, Git Bash veya PowerShell adımları.
+**Windows:** [docs/INSTALL-WINDOWS.md](docs/INSTALL-WINDOWS.md) — WSL, Git Bash, or PowerShell steps.
 
-Kurulumdan sonra `https://localhost` tarayıcıda güvenli görünür (CA sisteme yüklenir).
-
----
-
-## Özellikler
-
-- **Tek komut:** Root CA + localhost sertifikası + (isteğe bağlı) sistem güvenilir CA yüklemesi
-- **Çoklu platform:** macOS, Windows (WSL/Git Bash/PowerShell), Linux (Debian/Ubuntu, Fedora/RHEL)
-- **Standart formatlar:** PEM, CRT, PFX (Windows/.NET için; şifre: `pqcert`)
-- **SAN desteği:** localhost, *.localhost, local.dev, 127.0.0.1, ::1
+After install, `https://localhost` will appear secure in the browser (CA is installed to the system).
 
 ---
 
-## Dokümanlar
+## Features
 
-| Platform   | Kurulum kılavuzu |
-|-----------|-------------------|
+- **Single command:** Root CA + localhost certificate + (optional) system trust store install
+- **Multi-platform:** macOS, Windows (WSL/Git Bash/PowerShell), Linux (Debian/Ubuntu, Fedora/RHEL)
+- **Standard formats:** PEM, CRT, PFX (for Windows/.NET; password: `pqcert`)
+- **SAN support:** localhost, *.localhost, local.dev, 127.0.0.1, ::1
+
+---
+
+## Documentation
+
+| Platform   | Install guide |
+|-----------|----------------|
 | **macOS** | [docs/INSTALL-MACOS.md](docs/INSTALL-MACOS.md) |
 | **Windows** | [docs/INSTALL-WINDOWS.md](docs/INSTALL-WINDOWS.md) |
 | **Linux** | [docs/INSTALL-LINUX.md](docs/INSTALL-LINUX.md) |
 
-| Konu | Doküman |
-|------|---------|
-| Tüm dokümanlar | [docs/README.md](docs/README.md) |
-| Organizasyon kurulumu (GitHub) | [docs/ORGANIZATION_SETUP.md](docs/ORGANIZATION_SETUP.md) |
-| Katkıda bulunma | [CONTRIBUTING.md](CONTRIBUTING.md) |
-| Güvenlik | [SECURITY.md](SECURITY.md) |
-| Davranış kuralları | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) |
+| Topic | Document |
+|-------|----------|
+| All docs | [docs/README.md](docs/README.md) |
+| Organization setup (GitHub) | [docs/ORGANIZATION_SETUP.md](docs/ORGANIZATION_SETUP.md) |
+| Contributing | [CONTRIBUTING.md](CONTRIBUTING.md) |
+| Security | [SECURITY.md](SECURITY.md) |
+| Code of Conduct | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) |
 
 ---
 
-## Proje yapısı
+## Project structure
 
 ```
 pqcert/
 ├── cli/                 # CLI (pqcert localhost)
 ├── backend/             # API (FastAPI)
-├── frontend/            # Web arayüzü
-├── docs/                # Kurulum kılavuzları (macOS, Windows, Linux)
-├── install.sh           # Tek komut kurulum script'i
-├── Makefile             # localhost, test, docker, k8s hedefleri
+├── frontend/            # Web UI
+├── docs/                # Install guides (macOS, Windows, Linux)
+├── install.sh           # One-command install script
+├── Makefile             # localhost, test, docker, k8s targets
 └── docker-compose.yml   # API + frontend + Redis
 ```
 
 ---
 
-## Geliştirme
+## Development
 
 ```bash
-# Sertifikaları oluştur (CA'yı sisteme eklemeden)
+# Generate certificates (without installing CA to system)
 make localhost
 
-# CA'yı sisteme ekle (sudo gerekir)
+# Install CA to system (sudo required)
 make install-ca
 
-# HTTPS test sunucusu (https://localhost:8443)
+# HTTPS test server (https://localhost:8443)
 make test
 
-# Docker ile çalıştır
+# Run with Docker
 make docker
 ```
 
-Daha fazla hedef: `make help`
+More targets: `make help`
 
 ---
 
-## Lisans
+## License
 
-[MIT](LICENSE) — PQCert [organizasyonu](https://github.com/PQCert) altında.
+[MIT](LICENSE) — Under the [PQCert](https://github.com/PQCert) organization.

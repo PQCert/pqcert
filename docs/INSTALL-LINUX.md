@@ -1,14 +1,14 @@
-# PQCert – Linux Kurulumu
+# PQCert – Linux install
 
-Linux’ta PQCert ile localhost HTTPS sertifikası oluşturmak için aşağıdaki adımları kullanın. Dağıtımınız **Debian/Ubuntu** veya **Fedora/RHEL/CentOS** olabilir; CA’yı sisteme ekleme adımı dağıtıma göre farklıdır.
+Use the steps below to create a localhost HTTPS certificate with PQCert on Linux. Your distribution may be **Debian/Ubuntu** or **Fedora/RHEL/CentOS**; the step to add the CA to the system trust store differs by distribution.
 
 ---
 
-## Ön koşullar
+## Prerequisites
 
-**Adım 1.** Terminal’i açın.
+**Step 1.** Open a terminal.
 
-**Adım 2.** Gerekli araçları kontrol edin:
+**Step 2.** Check that required tools are installed:
 
 ```bash
 openssl version
@@ -16,7 +16,7 @@ python3 --version
 curl --version
 ```
 
-Hepsi çıktı veriyorsa devam edin. Yoksa aşağıdaki gibi kurun.
+If all show output, continue. Otherwise install as below.
 
 **Debian / Ubuntu:**
 
@@ -33,147 +33,147 @@ sudo dnf install -y openssl python3 curl
 
 ---
 
-## Yöntem A: Tek komutla kurulum (önerilen)
+## Method A: One-command install (recommended)
 
-**Adım 1.** Terminal’de şu komutu çalıştırın:
+**Step 1.** In the terminal, run:
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/PQCert/pqcert/main/install.sh | bash
 ```
 
-**Adım 2.** Script sırasıyla:
+**Step 2.** The script will:
 
-- Bağımlılıkları kontrol eder (OpenSSL, curl/wget).
-- PQCert CLI’ı indirir.
-- `~/.pqcert` altına kurar ve PATH’e ekler (genelde `/usr/local/bin/pqcert`).
-- Root CA oluşturur.
-- Localhost sertifikası oluşturur.
-- CA’yı sistem güvenilir sertifika deposuna eklemek ister; **sudo şifreniz** istenir.
+- Check dependencies (OpenSSL, curl/wget).
+- Download the PQCert CLI.
+- Install under `~/.pqcert` and add it to PATH (usually `/usr/local/bin/pqcert`).
+- Generate the Root CA.
+- Generate the localhost certificate.
+- Ask to add the CA to the system trust store; your **sudo password** will be prompted.
 
-**Adım 3.** Şifrenizi girin. CA, dağıtımınıza göre şu konumlardan birine eklenir:
+**Step 3.** Enter your password. The CA is added to one of these locations depending on your distribution:
 
-- **Debian/Ubuntu:** `/usr/local/share/ca-certificates/pqcert-ca.crt` sonra `update-ca-certificates`
-- **Fedora/RHEL:** `/etc/pki/ca-trust/source/anchors/pqcert-ca.crt` sonra `update-ca-trust extract`
+- **Debian/Ubuntu:** `/usr/local/share/ca-certificates/pqcert-ca.crt` then `update-ca-certificates`
+- **Fedora/RHEL:** `/etc/pki/ca-trust/source/anchors/pqcert-ca.crt` then `update-ca-trust extract`
 
-**Adım 4.** “PQCert installed successfully!” mesajını gördüyseniz kurulum tamamdır.
+**Step 4.** If you see “PQCert installed successfully!”, the install is complete.
 
-**Adım 5.** Doğrulama:
+**Step 5.** Verify:
 
 ```bash
 pqcert version
 ```
 
-Çıktı: `pqcert version 1.0.0` benzeri olmalı.
+You should see something like `pqcert version 1.0.0`.
 
 ---
 
-## Yöntem B: Proje klasöründen kurulum
+## Method B: Install from project folder
 
-PQCert kaynak kodunu indirdiyseniz:
+If you have cloned the PQCert source:
 
-**Adım 1.** Proje klasörüne gidin:
+**Step 1.** Go to the project folder:
 
 ```bash
 cd /path/to/pqcert
 ```
 
-Örnek: `cd ~/Development/pqcert`
+Example: `cd ~/Development/pqcert`
 
-**Adım 2.** Kurulum script’ini çalıştırın:
+**Step 2.** Run the install script:
 
 ```bash
 bash install.sh
 ```
 
-**Adım 3.** Şifre istenirse (CA’yı sisteme eklemek için) girin.
+**Step 3.** Enter your password when prompted (to add the CA to the system).
 
-**Alternatif – Sadece sertifika, CA’yı siz ekleyin:**
+**Alternative — Generate certificates only, add CA yourself:**
 
 ```bash
 make localhost
 ```
 
-Sonra CA’yı dağıtımınıza göre ekleyin (aşağıda).
+Then add the CA as described for your distribution below.
 
 ---
 
-## CA’yı sisteme ekleme (dağıtıma göre)
+## Add CA to system (by distribution)
 
-Script bunu otomatik yapmaya çalışır; manuel yapmak isterseniz:
+The script tries to do this automatically; to do it manually:
 
 ### Debian / Ubuntu
 
-**Adım 1.** CA dosyasını ca-certificates dizinine kopyalayın:
+**Step 1.** Copy the CA file into the ca-certificates directory:
 
 ```bash
 sudo cp ~/.pqcert/ca/pqcert-ca.crt /usr/local/share/ca-certificates/pqcert-ca.crt
 ```
 
-**Adım 2.** Sertifika önbelleğini güncelleyin:
+**Step 2.** Update the certificate store:
 
 ```bash
 sudo update-ca-certificates
 ```
 
-**Adım 3.** “1 added” benzeri bir mesaj görürsünüz.
+**Step 3.** You should see a message like “1 added”.
 
 ### Fedora / RHEL / CentOS
 
-**Adım 1.** CA dosyasını anchors dizinine kopyalayın:
+**Step 1.** Copy the CA file into the anchors directory:
 
 ```bash
 sudo cp ~/.pqcert/ca/pqcert-ca.crt /etc/pki/ca-trust/source/anchors/pqcert-ca.crt
 ```
 
-**Adım 2.** Güven deposunu güncelleyin:
+**Step 2.** Update the trust store:
 
 ```bash
 sudo update-ca-trust extract
 ```
 
-**Adım 3.** Tarayıcı ve `curl` artık bu CA’yı güvenilir kabul eder.
+**Step 3.** The browser and `curl` will now trust this CA.
 
-### Başka bir dağıtım
+### Other distributions
 
-- CA dosyası: `~/.pqcert/ca/pqcert-ca.crt`
-- Genelde `/usr/local/share/ca-certificates/` veya `/etc/pki/ca-trust/source/anchors/` gibi bir dizine kopyalanır ve dağıtımın “update-ca-certificates” / “update-ca-trust” komutu çalıştırılır. Dağıtım dokümantasyonuna bakın.
+- CA file: `~/.pqcert/ca/pqcert-ca.crt`
+- Typically it is copied to something like `/usr/local/share/ca-certificates/` or `/etc/pki/ca-trust/source/anchors/`, then the distribution’s “update-ca-certificates” or “update-ca-trust” command is run. Check your distribution’s documentation.
 
 ---
 
-## Dosya konumları (Linux)
+## File locations (Linux)
 
-| Ne | Konum |
-|----|--------|
+| Item | Location |
+|------|----------|
 | Root CA | `~/.pqcert/ca/pqcert-ca.pem` |
-| Root CA anahtarı | `~/.pqcert/ca/pqcert-ca-key.pem` |
-| Localhost sertifikası | `~/.pqcert/certs/localhost/localhost.pem` |
-| Localhost anahtarı | `~/.pqcert/certs/localhost/localhost-key.pem` |
-| Tam zincir | `~/.pqcert/certs/localhost/localhost-fullchain.pem` |
-| PFX (Windows/.NET) | `~/.pqcert/certs/localhost/localhost.pfx` (şifre: `pqcert`) |
+| Root CA key | `~/.pqcert/ca/pqcert-ca-key.pem` |
+| Localhost certificate | `~/.pqcert/certs/localhost/localhost.pem` |
+| Localhost key | `~/.pqcert/certs/localhost/localhost-key.pem` |
+| Full chain | `~/.pqcert/certs/localhost/localhost-fullchain.pem` |
+| PFX (Windows/.NET) | `~/.pqcert/certs/localhost/localhost.pfx` (password: `pqcert`) |
 
-`~` = ev dizininiz (örn. `/home/kullanici`).
+`~` is your home directory (e.g. `/home/user`).
 
 ---
 
-## HTTPS’i test etme
+## Test HTTPS
 
-**Adım 1.** Proje klasöründe:
+**Step 1.** From the project folder:
 
 ```bash
 make test
 ```
 
-veya:
+or:
 
 ```bash
 python3 test-server.py
 ```
 
-**Adım 2.** Tarayıcıda açın: **https://localhost:8443**
+**Step 2.** Open in the browser: **https://localhost:8443**
 
-**Adım 3.** CA’yı eklediyseniz uyarı çıkmaz; kilit/güvenli görünür.
+**Step 3.** If you added the CA, there should be no warning; you should see a lock/secure indicator.
 
-**Adım 4.** curl ile test:
+**Step 4.** Test with curl:
 
 ```bash
 curl -v --cacert ~/.pqcert/ca/pqcert-ca.pem https://localhost:8443
@@ -181,17 +181,17 @@ curl -v --cacert ~/.pqcert/ca/pqcert-ca.pem https://localhost:8443
 
 ---
 
-## CA’yı sistemden kaldırma
+## Remove CA from system
 
 ### Debian / Ubuntu
 
-**Adım 1.** CA dosyasını kaldırın:
+**Step 1.** Remove the CA file:
 
 ```bash
 sudo rm -f /usr/local/share/ca-certificates/pqcert-ca.crt
 ```
 
-**Adım 2.** Önbelleği güncelleyin:
+**Step 2.** Update the store:
 
 ```bash
 sudo update-ca-certificates
@@ -199,43 +199,43 @@ sudo update-ca-certificates
 
 ### Fedora / RHEL / CentOS
 
-**Adım 1.** CA dosyasını kaldırın:
+**Step 1.** Remove the CA file:
 
 ```bash
 sudo rm -f /etc/pki/ca-trust/source/anchors/pqcert-ca.crt
 ```
 
-**Adım 2.** Güven deposunu güncelleyin:
+**Step 2.** Update the trust store:
 
 ```bash
 sudo update-ca-trust extract
 ```
 
-### Tüm dağıtımlar – PQCert dosyalarını silmek
+### All distributions — Remove PQCert files
 
-**Adım 1.** Sertifikalar ve CA’yı silmek:
+**Step 1.** Remove certificates and CA data:
 
 ```bash
 rm -rf ~/.pqcert
 ```
 
-**Adım 2.** (İsteğe bağlı) PATH’e eklenen `pqcert` linkini kaldırmak:
+**Step 2.** (Optional) Remove the `pqcert` link from PATH:
 
 ```bash
 sudo rm -f /usr/local/bin/pqcert
 ```
 
-Proje içinde `make uninstall-ca` ve `make clean` varsa onları da kullanabilirsiniz.
+From the project folder you can also use `make uninstall-ca` and `make clean` if defined in the Makefile.
 
 ---
 
-## Kısa özet
+## Quick summary
 
-| Adım | Debian/Ubuntu | Fedora/RHEL |
+| Step | Debian/Ubuntu | Fedora/RHEL |
 |------|----------------|-------------|
-| Kurulum | `curl -sSL ... \| bash` veya `bash install.sh` | Aynı |
-| CA konumu | `/usr/local/share/ca-certificates/` | `/etc/pki/ca-trust/source/anchors/` |
-| Güncelleme | `sudo update-ca-certificates` | `sudo update-ca-trust extract` |
-| Kaldırma | `sudo rm .../pqcert-ca.crt` + `update-ca-certificates` | `sudo rm .../pqcert-ca.crt` + `update-ca-trust extract` |
+| Install | `curl -sSL ... \| bash` or `bash install.sh` | Same |
+| CA location | `/usr/local/share/ca-certificates/` | `/etc/pki/ca-trust/source/anchors/` |
+| Update | `sudo update-ca-certificates` | `sudo update-ca-trust extract` |
+| Remove | `sudo rm .../pqcert-ca.crt` + `update-ca-certificates` | `sudo rm .../pqcert-ca.crt` + `update-ca-trust extract` |
 
-Sorun olursa: `openssl version`, `python3 --version` ve `ls ~/.pqcert/ca/` ile kurulumun varlığını kontrol edin.
+If you run into issues, check that the install exists with: `openssl version`, `python3 --version`, and `ls ~/.pqcert/ca/`.

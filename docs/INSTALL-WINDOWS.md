@@ -1,177 +1,176 @@
-# PQCert – Windows Kurulumu
+# PQCert – Windows install
 
-Windows’ta PQCert ile localhost HTTPS sertifikası oluşturmak için aşağıdaki yöntemlerden birini kullanın. **Yöntem A (WSL)** en az sorunla çalışır; doğrudan Windows kullanmak isterseniz **Yöntem B** veya **C**’yi izleyin.
-
----
-
-## Ön koşullar (genel)
-
-- **OpenSSL** – Sertifika üretimi için gerekli.
-- **Python 3** – `pqcert_localhost.py` script’i için.
-- **curl veya PowerShell** – Dosya indirmek için.
+Use one of the methods below to create a localhost HTTPS certificate with PQCert on Windows. **Method A (WSL)** tends to work with the fewest issues; use **Method B** or **C** if you prefer native Windows.
 
 ---
 
-## Yöntem A: WSL (Windows Subsystem for Linux) ile kurulum (önerilen)
+## Prerequisites (general)
 
-WSL’de komutlar Linux gibi çalışır; kurulum [Linux kurulum kılavuzuna](./INSTALL-LINUX.md) çok benzer.
+- **OpenSSL** — Required for certificate generation.
+- **Python 3** — For the `pqcert_localhost.py` script.
+- **curl or PowerShell** — For downloading files.
 
-**Adım 1.** WSL’i açın (Windows Başlat menüsünde “WSL” veya “Ubuntu” yazın).
+---
 
-**Adım 2.** Proje klasörüne gidin. Windows diskine erişim örneği:
+## Method A: Install with WSL (Windows Subsystem for Linux) (recommended)
+
+In WSL, commands behave like Linux; the install flow matches the [Linux install guide](./INSTALL-LINUX.md).
+
+**Step 1.** Open WSL (search for “WSL” or “Ubuntu” in the Start menu).
+
+**Step 2.** Go to the project folder. Example for accessing the Windows drive:
 
 ```bash
-cd /mnt/c/Users/KULLANICI_ADINIZ/Documents/Development/pqcert
+cd /mnt/c/Users/YOUR_USERNAME/Documents/Development/pqcert
 ```
 
-Kendi kullanıcı adınızı ve yolu yazın.
+Replace with your username and path.
 
-**Adım 3.** Kurulum script’ini çalıştırın:
+**Step 3.** Run the install script:
 
 ```bash
 bash install.sh
 ```
 
-**Adım 4.** CA’yı WSL içindeki Linux’a yükler; Windows tarayıcısı için CA’yı Windows’a da eklemeniz gerekir (aşağıda [Windows’a CA ekleme](#windowsa-ca-ekleme-yöntem-b-ve-c-icin) bölümüne bakın).
+**Step 4.** This installs the CA inside WSL’s Linux; for the Windows browser you must also add the CA to Windows (see [Add CA to Windows](#add-ca-to-windows-methods-b-and-c) below).
 
-**Adım 5.** Sertifika dosyaları WSL içinde: `~/.pqcert/certs/localhost/`. Windows’tan erişim: `\\wsl$\Ubuntu\home\KULLANICI\.pqcert\...` (dağıtım adı farklı olabilir).
+**Step 5.** Certificate files in WSL: `~/.pqcert/certs/localhost/`. From Windows: `\\wsl$\Ubuntu\home\USER\.pqcert\...` (distribution name may differ).
 
 ---
 
-## Yöntem B: Git Bash ile kurulum
+## Method B: Install with Git Bash
 
-**Adım 1.** [Git for Windows](https://git-scm.com/download/win) kurun (Git Bash ile gelir).
+**Step 1.** Install [Git for Windows](https://git-scm.com/download/win) (includes Git Bash).
 
-**Adım 2.** OpenSSL’i Windows’ta kullanılabilir yapın:
+**Step 2.** Make OpenSSL available on Windows:
 
-- **Seçenek 1:** [OpenSSL Windows indirme](https://slproweb.com/products/Win32OpenSSL.html) – “Win64 OpenSSL” indirip kurun; kurulumda “PATH’e ekle” seçeneğini işaretleyin.
-- **Seçenek 2:** Chocolatey ile: `choco install openssl` (yönetici PowerShell’de).
+- **Option 1:** [OpenSSL for Windows](https://slproweb.com/products/Win32OpenSSL.html) — Download and install “Win64 OpenSSL”; during setup, choose “Add to PATH”.
+- **Option 2:** With Chocolatey: `choco install openssl` (in an elevated PowerShell).
 
-**Adım 3.** [Python 3 for Windows](https://www.python.org/downloads/) kurun. Kurulumda **“Add Python to PATH”** kutusunu işaretleyin.
+**Step 3.** Install [Python 3 for Windows](https://www.python.org/downloads/). During setup, check **“Add Python to PATH”**.
 
-**Adım 4.** Git Bash’i açın.
+**Step 4.** Open Git Bash.
 
-**Adım 5.** Proje klasörüne gidin:
+**Step 5.** Go to the project folder:
 
 ```bash
-cd /c/Users/KULLANICI_ADINIZ/Documents/Development/pqcert
+cd /c/Users/YOUR_USERNAME/Documents/Development/pqcert
 ```
 
-**Adım 6.** Sertifikaları oluşturun:
+**Step 6.** Generate certificates:
 
 ```bash
 python3 cli/pqcert_localhost.py --no-install
 ```
 
-**Adım 7.** CA’yı Windows’a ekleyin: [Windows’a CA ekleme](#windowsa-ca-ekleme-yöntem-b-ve-c-icin) bölümüne gidin.
+**Step 7.** Add the CA to Windows: follow [Add CA to Windows](#add-ca-to-windows-methods-b-and-c) below.
 
 ---
 
-## Yöntem C: PowerShell ile kurulum
+## Method C: Install with PowerShell
 
-**Adım 1.** OpenSSL ve Python 3’ü Yöntem B’deki gibi kurun; PATH’te olduklarından emin olun.
+**Step 1.** Install OpenSSL and Python 3 as in Method B; ensure they are on PATH.
 
-**Adım 2.** PowerShell’i **Yönetici olarak** açın (sağ tık → Yönetici olarak çalıştır).
+**Step 2.** Open PowerShell **as Administrator** (right-click → Run as administrator).
 
-**Adım 3.** Proje klasörüne gidin:
+**Step 3.** Go to the project folder:
 
 ```powershell
-cd C:\Users\KULLANICI_ADINIZ\Documents\Development\pqcert
+cd C:\Users\YOUR_USERNAME\Documents\Development\pqcert
 ```
 
-**Adım 4.** PQCert dizinini oluşturun:
+**Step 4.** Create the PQCert directory:
 
 ```powershell
 $pqcert = "$env:USERPROFILE\.pqcert"
 New-Item -ItemType Directory -Force -Path "$pqcert\ca", "$pqcert\certs\localhost"
 ```
 
-**Adım 5.** CLI script’ini indirin (veya projede zaten varsa bu adımı atlayın):
+**Step 5.** Download the CLI script (or skip if the project already has it):
 
 ```powershell
+New-Item -ItemType Directory -Force -Path "$pqcert\bin"
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/PQCert/pqcert/main/cli/pqcert_localhost.py" -OutFile "$pqcert\bin\pqcert_localhost.py"
 ```
 
-`$pqcert\bin` klasörünü önce oluşturun: `New-Item -ItemType Directory -Force -Path "$pqcert\bin"`
-
-**Adım 6.** Sertifikaları oluşturmak için Python script’ini çalıştırın:
+**Step 6.** Run the Python script to generate certificates:
 
 ```powershell
 python cli/pqcert_localhost.py --no-install
 ```
 
-Script varsayılan olarak `%USERPROFILE%\.pqcert` kullanır; proje içinden çalıştırdığınızda aynı dizine yazar.
+The script uses `%USERPROFILE%\.pqcert` by default; when run from the project folder it writes there.
 
-**Adım 7.** CA’yı Windows’a ekleyin: aşağıdaki “Windows’a CA ekleme” adımlarını uygulayın.
+**Step 7.** Add the CA to Windows: follow the steps in [Add CA to Windows](#add-ca-to-windows-methods-b-and-c) below.
 
 ---
 
-## Windows’a CA ekleme (Yöntem B ve C için)
+## Add CA to Windows (Methods B and C)
 
-Tarayıcının “Güvenli” demesi için CA’yı Windows güvenilir kök deposuna eklemeniz gerekir.
+For the browser to show the site as secure, add the CA to the Windows trusted root store.
 
-**Adım 1.** CA dosyasının konumunu bulun:
+**Step 1.** Locate the CA file:
 
-- WSL: `~/.pqcert/ca/pqcert-ca.crt` → Windows’ta `\\wsl$\...\...\pqcert-ca.crt` olarak erişin.
-- Git Bash/PowerShell (yerel): `%USERPROFILE%\.pqcert\ca\pqcert-ca.crt`  
-  Örnek: `C:\Users\Adiniz\.pqcert\ca\pqcert-ca.crt`
+- WSL: `~/.pqcert/ca/pqcert-ca.crt` — from Windows access as `\\wsl$\...\...\pqcert-ca.crt`.
+- Git Bash/PowerShell (local): `%USERPROFILE%\.pqcert\ca\pqcert-ca.crt`  
+  Example: `C:\Users\YourName\.pqcert\ca\pqcert-ca.crt`
 
-**Adım 2.** PowerShell’i **Yönetici olarak** açın.
+**Step 2.** Open PowerShell **as Administrator**.
 
-**Adım 3.** Aşağıdaki komutu çalıştırın (yolu kendi CA dosya yolunuzla değiştirin):
+**Step 3.** Run (adjust path if needed):
 
 ```powershell
 Import-Certificate -FilePath "$env:USERPROFILE\.pqcert\ca\pqcert-ca.crt" -CertStoreLocation Cert:\LocalMachine\Root
 ```
 
-**Alternatif (CMD – Yönetici):**
+**Alternative (CMD as Administrator):**
 
 ```cmd
 certutil -addstore -f ROOT %USERPROFILE%\.pqcert\ca\pqcert-ca.crt
 ```
 
-**Adım 4.** Tarayıcıyı kapatıp tekrar açın; https://localhost:8443 adresini deneyin.
+**Step 4.** Close and reopen the browser; try https://localhost:8443.
 
 ---
 
-## Dosya konumları (Windows)
+## File locations (Windows)
 
-| Ne | Konum |
-|----|--------|
+| Item | Location |
+|------|----------|
 | Root CA | `%USERPROFILE%\.pqcert\ca\pqcert-ca.crt` |
-| Localhost sertifikası | `%USERPROFILE%\.pqcert\certs\localhost\localhost.pem` |
-| Localhost anahtarı | `%USERPROFILE%\.pqcert\certs\localhost\localhost-key.pem` |
-| PFX (IIS, .NET) | `%USERPROFILE%\.pqcert\certs\localhost\localhost.pfx` (şifre: `pqcert`) |
+| Localhost certificate | `%USERPROFILE%\.pqcert\certs\localhost\localhost.pem` |
+| Localhost key | `%USERPROFILE%\.pqcert\certs\localhost\localhost-key.pem` |
+| PFX (IIS, .NET) | `%USERPROFILE%\.pqcert\certs\localhost\localhost.pfx` (password: `pqcert`) |
 
-`%USERPROFILE%` genelde `C:\Users\KullaniciAdiniz` olur.
+`%USERPROFILE%` is usually `C:\Users\YourUsername`.
 
 ---
 
-## HTTPS’i test etme
+## Test HTTPS
 
-**Adım 1.** Proje klasöründe (Git Bash veya PowerShell):
+**Step 1.** From the project folder (Git Bash or PowerShell):
 
 ```bash
 python test-server.py
 ```
 
-**Adım 2.** Tarayıcıda açın: **https://localhost:8443**
+**Step 2.** Open in the browser: **https://localhost:8443**
 
-**Adım 3.** CA’yı eklediyseniz sayfa güvenli görünmeli.
+**Step 3.** If you added the CA, the page should show as secure.
 
 ---
 
-## CA’yı sistemden kaldırma
+## Remove CA from system
 
-**Adım 1.** PowerShell’i **Yönetici olarak** açın.
+**Step 1.** Open PowerShell **as Administrator**.
 
-**Adım 2.** PQCert CA’yı kök depodan kaldırın:
+**Step 2.** Remove the PQCert CA from the root store:
 
 ```powershell
 Get-ChildItem -Path Cert:\LocalMachine\Root | Where-Object { $_.Subject -like "*PQCert*" } | Remove-Item
 ```
 
-**Adım 3.** (İsteğe bağlı) PQCert dosyalarını silmek için:
+**Step 3.** (Optional) Remove PQCert files:
 
 ```powershell
 Remove-Item -Recurse -Force "$env:USERPROFILE\.pqcert"
@@ -179,12 +178,12 @@ Remove-Item -Recurse -Force "$env:USERPROFILE\.pqcert"
 
 ---
 
-## Kısa özet
+## Quick summary
 
-| Adım | WSL | Git Bash / PowerShell |
+| Step | WSL | Git Bash / PowerShell |
 |------|-----|------------------------|
-| 1 | WSL’de `bash install.sh` | OpenSSL + Python kur, `python cli/pqcert_localhost.py --no-install` |
-| 2 | CA’yı Windows’a eklemek için PowerShell: `Import-Certificate ...` | Aynı |
-| 3 | Test: `python test-server.py` → https://localhost:8443 | Aynı |
+| 1 | In WSL: `bash install.sh` | Install OpenSSL + Python, run `python cli/pqcert_localhost.py --no-install` |
+| 2 | Add CA to Windows: PowerShell `Import-Certificate ...` | Same |
+| 3 | Test: `python test-server.py` → https://localhost:8443 | Same |
 
-Sorun yaşarsanız önce OpenSSL ve Python’un PATH’te olduğunu kontrol edin: `openssl version` ve `python --version`.
+If something fails, check that OpenSSL and Python are on PATH: `openssl version` and `python --version`.

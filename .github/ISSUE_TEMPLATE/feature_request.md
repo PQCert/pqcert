@@ -1,27 +1,27 @@
 ---
 name: Feature request
-about: Yeni özellik veya iyileştirme önerisi
+about: Suggest a new feature or improvement
 title: '[Feature] '
 labels: enhancement
 assignees: ''
 ---
 
-## Öneri
+## Suggestion
 
-Kısa ve net: Ne eklenmesini veya değişmesini istiyorsunuz?
+Brief and clear: What would you like to add or change?
 
-## Gerekçe
+## Motivation
 
-Bu özellik neden faydalı? Hangi sorunu çözer?
+Why is this useful? What problem does it solve?
 
-## Olası çözüm
+## Possible solution
 
-Nasıl uygulanabileceğine dair fikriniz varsa kısaca yazın.
+If you have an idea of how to implement it, describe it briefly.
 
-## Alternatifler
+## Alternatives
 
-Düşündüğünüz başka çözümler varsa belirtin.
+Any other approaches you have considered.
 
-## Ek bilgi
+## Additional context
 
-Platform (macOS / Windows / Linux) veya kullanım senaryosu ile ilgili ek bilgi ekleyebilirsiniz.
+Platform (macOS / Windows / Linux) or use case details if relevant.

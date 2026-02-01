@@ -1,38 +1,38 @@
-# Katkıda Bulunma
+# Contributing
 
-PQCert projesine katkılarınızı bekliyoruz. Aşağıdaki adımlar işinizi kolaylaştırır.
+Contributions to PQCert are welcome from everyone—regardless of background, identity, or experience level. The steps below will help you get started.
 
-## Davranış kuralları
+## Code of Conduct
 
-Bu proje [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) ile uyumludur. Katkıda bulunurken saygılı ve yapıcı olun.
+This project follows [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). Please be respectful, constructive, and inclusive when contributing.
 
-## Nasıl katkıda bulunulur?
+## How to contribute
 
-1. **Issue açın** — Hata veya özellik önerisi için [GitHub Issues](https://github.com/PQCert/pqcert/issues) kullanın.
-2. **Fork edin** — Repoyu kendi hesabınıza fork edin.
-3. **Branch oluşturun** — `main` üzerinde çalışmayın; örneğin `fix/install-linux` veya `feat/windows-powershell`.
-4. **Değişiklik yapın** — Kodunuzu yazın; mümkünse test ekleyin.
-5. **Pull request açın** — `main` dalına PR gönderin; açıklayıcı bir başlık ve gerekirse issue numarası ekleyin.
+1. **Open an issue** — Use [GitHub Issues](https://github.com/PQCert/pqcert/issues) for bugs or feature requests.
+2. **Fork the repo** — Fork the repository to your account.
+3. **Create a branch** — Do not work directly on `main`; use e.g. `fix/install-linux` or `feat/windows-powershell`.
+4. **Make changes** — Implement your changes; add tests when possible.
+5. **Open a pull request** — Submit a PR to `main` with a clear title and, if applicable, the issue number.
 
-## Geliştirme ortamı
+## Development environment
 
-- **Python 3.10+** — CLI ve backend için.
-- **OpenSSL** — Sertifika üretimi için.
-- Yerel test: `make localhost` ve `make test`.
+- **Python 3.10+** — For CLI and backend.
+- **OpenSSL** — For certificate generation.
+- Local test: `make localhost` and `make test`.
 
-## Kod stili
+## Code style
 
-- Python: PEP 8; proje kökünde `.editorconfig` kullanılır.
-- Shell: `install.sh` bash ile yazılmıştır; taşınabilir olmaya dikkat edin.
+- Python: PEP 8; the project uses `.editorconfig` at the repo root.
+- Shell: `install.sh` is written in bash; keep it portable.
 
-## Dokümanlar
+## Documentation
 
-- Kurulum kılavuzları `docs/` altındadır (macOS, Windows, Linux).
-- Değişiklik yaparken ilgili `docs/*.md` dosyasını da güncelleyin.
+- Install guides live under `docs/` (macOS, Windows, Linux).
+- When changing behavior, update the relevant `docs/*.md` file.
 
-## Sorular
+## Questions
 
-- **Bug:** [Issue](https://github.com/PQCert/pqcert/issues) açın; işletim sistemi ve adımları belirtin.
-- **Özellik:** Önce bir issue ile tartışın; PR’ı ona bağlayın.
+- **Bugs:** Open an [issue](https://github.com/PQCert/pqcert/issues); include OS and steps to reproduce.
+- **Features:** Discuss in an issue first; link your PR to it.
 
-Teşekkürler.
+Thank you.
