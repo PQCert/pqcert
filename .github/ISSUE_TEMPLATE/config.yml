@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: PQCert Docs
+    url: https://github.com/PQCert/pqcert#readme
+    about: Kurulum ve kullanım dokümanları

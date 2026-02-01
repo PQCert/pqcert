@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pqcert-nginx-conf
+  namespace: pqcert
+data:
+  default.conf: |
+    upstream api {
+        server pqcert-api:8000;
+    }
+
+    server {
+        listen 80;
+        server_name localhost;
+
+        root /usr/share/nginx/html;
+        index index.html;
+
+        location /v1/ {
+            proxy_pass http://api;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+
+        location /install {
+            proxy_pass http://api/install;
+        }
+
+        location /health {
+            proxy_pass http://api/health;
+        }
+
+        location /docs {
+            proxy_pass http://api/docs;
+        }
+
+        location /openapi.json {
+            proxy_pass http://api/openapi.json;
+        }
+
+        location / {
+            try_files $uri $uri/ /index.html;
+        }
+    }

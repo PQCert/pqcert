@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pqcert-frontend
+  namespace: pqcert
+  labels:
+    app: pqcert-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pqcert-frontend
+  template:
+    metadata:
+      labels:
+        app: pqcert-frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: frontend-html
+          mountPath: /usr/share/nginx/html
+        - name: nginx-conf
+          mountPath: /etc/nginx/conf.d
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+      volumes:
+      - name: frontend-html
+        configMap:
+          name: pqcert-frontend-html
+      - name: nginx-conf
+        configMap:
+          name: pqcert-nginx-conf
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pqcert-frontend
+  namespace: pqcert
+spec:
+  selector:
+    app: pqcert-frontend
+  ports:
+  - port: 80
+    targetPort: 80
+  type: ClusterIP
