@@ -1,9 +1,10 @@
 ---
 name: Feature request
 about: Yeni özellik veya iyileştirme önerisi
-title: '[Feature] '
+title: "[Feature] "
 labels: enhancement
 assignees: ''
+
 ---
 
 ## Öneri

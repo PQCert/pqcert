@@ -1,9 +1,10 @@
 ---
 name: Bug report
 about: Hata veya beklenmeyen davranış bildirimi
-title: '[Bug] '
+title: "[Bug] "
 labels: bug
 assignees: ''
+
 ---
 
 ## Açıklama
