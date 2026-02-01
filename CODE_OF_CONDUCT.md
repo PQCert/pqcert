@@ -1,36 +1,37 @@
-# Davranış Kuralları (Code of Conduct)
+# Code of Conduct
 
-## Taahhüdümüz
+## Our commitment
 
-PQCert topluluğunda herkesin güvenli ve saygılı bir ortamda yer almasını istiyoruz. Bu nedenle katkıda bulunan ve projeyi kullanan herkesin bu kurallara uymasını bekliyoruz.
+We want everyone in the PQCert community to participate in a safe, respectful, and **inclusive** environment. We welcome contributors and users of any background, identity, or experience. We expect all participants to follow these guidelines.
 
-## Beklenen davranışlar
+## Expected behavior
 
-- Başkalarına saygı göstermek
-- Farklı görüş ve deneyimlere açık olmak
-- Yapıcı geri bildirim kabul etmek ve vermek
-- Topluluk odaklı kararlar almak
-- Hatalara karşı anlayışlı olmak
+- Be respectful and welcoming of others
+- Be open to different views, experiences, and skill levels
+- Use inclusive language (e.g. “they” for individuals when appropriate; avoid assumptions about identity or background)
+- Accept and give constructive feedback
+- Focus on what is best for the community
+- Be understanding when mistakes happen
 
-## Kabul edilemez davranışlar
+## Unacceptable behavior
 
-- Hakaret, ayrımcılık veya taciz
-- Kişisel veya siyasi saldırılar
-- Başkalarının gizliliğini ihlal
-- Profesyonel olmayan veya istenmeyen iletişim
+- Insults, discrimination, or harassment
+- Personal or political attacks
+- Violating others’ privacy
+- Unprofessional or unwelcome communication
 
-## Sorumluluk
+## Responsibility
 
-Proje maintainer’ları kabul edilebilir davranış standartlarını netleştirmek ve uygunsuz davranışlara makul ve adil müdahale etmekle yükümlüdür.
+Project maintainers are responsible for clarifying standards of acceptable behavior and for taking fair and appropriate action in response to unacceptable behavior.
 
-## Kapsam
+## Scope
 
-Bu kurallar proje alanında, resmi iletişim kanallarında ve topluluk etkinliklerinde geçerlidir.
+These guidelines apply in project spaces, official communication channels, and community events.
 
-## Uygulama
+## Enforcement
 
-Kabul edilemez davranışlar hakkında bilgi vermek için [SECURITY.md](SECURITY.md) içindeki iletişim kanallarını kullanabilirsiniz. Şikayetler incelenecek ve gerektiğinde yanıt verilecektir.
+To report unacceptable behavior, use the contact channels described in [SECURITY.md](SECURITY.md). Reports will be reviewed and addressed as appropriate.
 
 ---
 
-*Bu metin, katkıda bulunan herkes için net bir beklenti sunmak amacıyla hazırlanmıştır.*
+*This document is intended to set clear expectations for everyone who contributes. We are committed to making PQCert inclusive for all.*

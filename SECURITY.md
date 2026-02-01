@@ -1,29 +1,29 @@
-# Güvenlik
+# Security
 
-## Güvenlik açığı bildirimi
+## Reporting a vulnerability
 
-Güvenlik ile ilgili bir sorun bulduğunuzda lütfen bunu **herkese açık bir issue açarak değil**, doğrudan proje maintainer’larına iletin.
+If you find a security-related issue, please **do not** open a public issue. Report it directly to the project maintainers.
 
-### Nasıl bildirilir?
+### How to report
 
-- **E-posta:** [GitHub PQCert organizasyonu](https://github.com/PQCert) üzerinden iletişim kurabilirsiniz; veya
-- **GitHub Security:** Repo sayfasında **Security** → **Report a vulnerability** (açıksa) kullanın.
+- **Email:** Reach out via the [PQCert organization](https://github.com/PQCert) on GitHub; or
+- **GitHub Security:** Use **Security** → **Report a vulnerability** on the repo page (if enabled).
 
-Mümkünse aşağıdakileri ekleyin:
+When possible, include:
 
-- Sorunun kısa açıklaması
-- Etkilenen bileşen (CLI, backend, install script, vb.)
-- Adım adım yeniden üretim (mümkünse)
-- Önerilen çözüm (varsa)
+- A short description of the issue
+- Affected component (CLI, backend, install script, etc.)
+- Steps to reproduce (if possible)
+- Suggested fix (if any)
 
-### Beklenti
+### What to expect
 
-- Bildirimi makul sürede inceleyeceğiz.
-- Düzeltme yayınlanana kadar detayları gizli tutmaya çalışacağız (koordineli açıklama).
-- Bildirimi yapan kişiyi (isteğe bağlı) teşekkürler bölümünde anacağız.
+- We will review the report in a timely manner.
+- We will keep details confidential until a fix is released (coordinated disclosure).
+- We may acknowledge the reporter(s) (optional) in credits.
 
-### PQCert’in kapsamı
+### Scope of PQCert
 
-PQCert **yerel geliştirme** için Root CA ve localhost sertifikası üretir. Bu CA’yı yalnızca güvendiğiniz makinelerde kullanın; production ortamında kendi CA’nızı kullanmanız gerekir.
+PQCert generates a **local development** Root CA and localhost certificate. Use this CA only on machines you trust; use your own CA in production.
 
-Sertifika dosyaları (`~/.pqcert`) ve özellikle private key’ler paylaşılmamalı ve güvenli saklanmalıdır.
+Certificate files (`~/.pqcert`) and especially private keys must not be shared and should be stored securely.

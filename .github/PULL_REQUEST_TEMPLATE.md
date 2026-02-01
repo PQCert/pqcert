@@ -1,21 +1,21 @@
-## Açıklama
+## Description
 
-Bu PR ne yapıyor? Kısa özet yazın.
+What does this PR do? Give a short summary.
 
-## Değişiklik türü
+## Type of change
 
 - [ ] Bug fix
-- [ ] Yeni özellik
-- [ ] Doküman güncellemesi
-- [ ] Refactoring / temizlik
-- [ ] Diğer (açıklayın)
+- [ ] New feature
+- [ ] Documentation update
+- [ ] Refactor / cleanup
+- [ ] Other (please describe)
 
-## İlgili issue
+## Related issue
 
-Varsa: Closes #(issue numarası)
+If applicable: Closes #(issue number)
 
-## Kontrol listesi
+## Checklist
 
-- [ ] Kod yerel ortamda test edildi (`make test` veya ilgili adımlar)
-- [ ] Dokümanlar güncellendi (kurulum veya kullanım değiştiyse)
-- [ ] CHANGELOG.md güncellendi (kullanıcıya yansıyan değişiklik varsa)
+- [ ] Code was tested locally (`make test` or relevant steps)
+- [ ] Documentation was updated (if install or usage changed)
+- [ ] CHANGELOG.md was updated (if there are user-facing changes)

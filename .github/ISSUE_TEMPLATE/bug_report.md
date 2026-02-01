@@ -1,27 +1,27 @@
 ---
 name: Bug report
-about: Hata veya beklenmeyen davranış bildirimi
+about: Report a bug or unexpected behavior
 title: '[Bug] '
 labels: bug
 assignees: ''
 ---
 
-## Açıklama
+## Description
 
-Kısa ve net: Sorun nedir?
+Brief and clear: What is the problem?
 
-## Yeniden üretim
+## Steps to reproduce
 
-1. Hangi komutu / adımı çalıştırdınız?
-2. Ne bekliyordunuz?
-3. Ne oldu? (hata mesajı veya ekran görüntüsü)
+1. What command or step did you run?
+2. What did you expect?
+3. What actually happened? (error message or screenshot)
 
-## Ortam
+## Environment
 
-- **İşletim sistemi:** (örn. macOS 14, Windows 11, Ubuntu 22.04)
-- **Kurulum yöntemi:** (install.sh / make / manuel)
-- **PQCert sürümü:** (`pqcert version` çıktısı, varsa)
+- **OS:** (e.g. macOS 14, Windows 11, Ubuntu 22.04)
+- **Install method:** (install.sh / make / manual)
+- **PQCert version:** (output of `pqcert version`, if available)
 
-## Ek bilgi
+## Additional context
 
-Log, ekran görüntüsü veya ilgili dosya içeriği ekleyebilirsiniz.
+Logs, screenshots, or relevant file contents if helpful.

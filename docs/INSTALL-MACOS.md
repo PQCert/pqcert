@@ -1,168 +1,168 @@
-# PQCert – macOS Kurulumu
+# PQCert – macOS install
 
-macOS’ta PQCert ile localhost HTTPS sertifikası oluşturmak için aşağıdaki adımları sırayla uygulayın.
+Follow these steps to create a localhost HTTPS certificate with PQCert on macOS.
 
 ---
 
-## Ön koşullar
+## Prerequisites
 
-Bunların yüklü olduğundan emin olun:
+Make sure these are installed:
 
-1. **Terminal** – Uygulamalar → Araçlar → Terminal (veya Spotlight’ta “Terminal” yazın).
-2. **OpenSSL** – macOS’ta genelde yüklüdür. Kontrol için:
+1. **Terminal** — Applications → Utilities → Terminal (or search “Terminal” in Spotlight).
+2. **OpenSSL** — Usually preinstalled on macOS. Check:
    ```bash
    openssl version
    ```
-   Çıktı görüyorsanız (örn. `OpenSSL 3.x`) devam edin.
-3. **Python 3** – Kontrol:
+   If you see output (e.g. `OpenSSL 3.x`), continue.
+3. **Python 3** — Check:
    ```bash
    python3 --version
    ```
-   Yoksa [python.org](https://www.python.org/downloads/) veya `brew install python3` ile kurun.
-4. **curl** – Genelde yüklüdür. Kontrol:
+   If missing, install from [python.org](https://www.python.org/downloads/) or `brew install python3`.
+4. **curl** — Usually preinstalled. Check:
    ```bash
    curl --version
    ```
 
 ---
 
-## Yöntem A: Tek komutla kurulum (önerilen)
+## Method A: One-command install (recommended)
 
-Proje klasöründe değilseniz, doğrudan install script’ini çalıştırabilirsiniz:
+If you are not in the project folder, you can run the install script directly:
 
-**Adım 1.** Terminal’i açın.
+**Step 1.** Open Terminal.
 
-**Adım 2.** Aşağıdaki komutu kopyalayıp yapıştırın ve Enter’a basın:
+**Step 2.** Copy and paste the command below, then press Enter:
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/PQCert/pqcert/main/install.sh | bash
 ```
 
-**Not:** Eğer script projede yerel olarak duruyorsa:
+**Note:** If the script is in your local project folder:
 
 ```bash
 cd /path/to/pqcert
 bash install.sh
 ```
 
-**Adım 3.** Şifre istenirse (sudo): Mac giriş şifrenizi girin. Bu, CA sertifikasını sistem anahtarına eklemek için kullanılır.
+**Step 3.** If prompted for a password (sudo): enter your Mac login password. This is used to add the CA certificate to the system keychain.
 
-**Adım 4.** “PQCert installed successfully!” mesajını gördüyseniz kurulum tamamlanmıştır.
+**Step 4.** If you see “PQCert installed successfully!”, the install is complete.
 
 ---
 
-## Yöntem B: Proje klasöründen Make ile kurulum
+## Method B: Install from project folder with Make
 
-PQCert projesini bilgisayarınıza indirdiyseniz:
+If you have cloned the PQCert project:
 
-**Adım 1.** Terminal’i açın.
+**Step 1.** Open Terminal.
 
-**Adım 2.** Proje klasörüne gidin (örnek):
+**Step 2.** Go to the project folder (example):
 
 ```bash
 cd ~/Documents/Development/pqcert
 ```
 
-**Adım 3.** Localhost sertifikasını oluşturun:
+**Step 3.** Generate the localhost certificate:
 
 ```bash
 make localhost
 ```
 
-**Adım 4.** CA’yı sistem güvenilir sertifikalarına ekleyin (tarayıcı uyarı vermesin diye):
+**Step 4.** Add the CA to the system trust store (so the browser does not warn):
 
 ```bash
 make install-ca
 ```
 
-Şifre sorulursa Mac giriş şifrenizi girin.
+Enter your Mac password if prompted.
 
-**Adım 5.** Kurulumu doğrulayın:
+**Step 5.** Verify:
 
 ```bash
 pqcert version
 ```
 
-Çıktı: `pqcert version 1.0.0` benzeri bir satır olmalı.
+You should see something like `pqcert version 1.0.0`.
 
 ---
 
-## Yöntem C: Python script ile manuel adımlar
+## Method C: Manual steps with Python script
 
-**Adım 1.** Proje klasörüne gidin:
+**Step 1.** Go to the project folder:
 
 ```bash
 cd /path/to/pqcert
 ```
 
-**Adım 2.** Sadece sertifikaları oluşturun (CA’yı sisteme eklemeden):
+**Step 2.** Generate certificates only (do not install CA to system):
 
 ```bash
 python3 cli/pqcert_localhost.py --no-install
 ```
 
-**Adım 3.** CA’yı macOS Keychain’e ekleyin (yönetici şifresi gerekir):
+**Step 3.** Add the CA to macOS Keychain (requires admin password):
 
 ```bash
 sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ~/.pqcert/ca/pqcert-ca.crt
 ```
 
-**Adım 4.** Şifrenizi girin ve Enter’a basın.
+**Step 4.** Enter your password and press Enter.
 
 ---
 
-## Dosya konumları (macOS)
+## File locations (macOS)
 
-| Ne | Konum |
-|----|--------|
+| Item | Location |
+|------|----------|
 | Root CA | `~/.pqcert/ca/pqcert-ca.pem` |
-| Root CA anahtarı | `~/.pqcert/ca/pqcert-ca-key.pem` |
-| Localhost sertifikası | `~/.pqcert/certs/localhost/localhost.pem` |
-| Localhost anahtarı | `~/.pqcert/certs/localhost/localhost-key.pem` |
-| Tam zincir | `~/.pqcert/certs/localhost/localhost-fullchain.pem` |
-| PFX (Windows/.NET) | `~/.pqcert/certs/localhost/localhost.pfx` (şifre: `pqcert`) |
+| Root CA key | `~/.pqcert/ca/pqcert-ca-key.pem` |
+| Localhost certificate | `~/.pqcert/certs/localhost/localhost.pem` |
+| Localhost key | `~/.pqcert/certs/localhost/localhost-key.pem` |
+| Full chain | `~/.pqcert/certs/localhost/localhost-fullchain.pem` |
+| PFX (Windows/.NET) | `~/.pqcert/certs/localhost/localhost.pfx` (password: `pqcert`) |
 
-`~` = kullanıcı klasörünüz (örn. `/Users/adiniz`).
+`~` is your home folder (e.g. `/Users/yourname`).
 
 ---
 
-## HTTPS’i test etme
+## Test HTTPS
 
-**Adım 1.** Test sunucusunu başlatın:
+**Step 1.** Start the test server:
 
 ```bash
 cd /path/to/pqcert
 make test
 ```
 
-veya:
+or:
 
 ```bash
 python3 test-server.py
 ```
 
-**Adım 2.** Tarayıcıda açın: **https://localhost:8443**
+**Step 2.** Open in the browser: **https://localhost:8443**
 
-**Adım 3.** “Güvenli” veya kilit simgesi görüyorsanız CA doğru yüklüdür.
+**Step 3.** If you see “Secure” or a lock icon, the CA is installed correctly.
 
 ---
 
-## CA’yı sistemden kaldırma
+## Remove CA from system
 
-PQCert CA’yı Mac’in güvenilir listesinden silmek için:
+To remove the PQCert CA from the Mac trust store:
 
-**Adım 1.** Terminal’de:
+**Step 1.** In Terminal:
 
 ```bash
 sudo security delete-certificate -c "PQCert Local Development CA" /Library/Keychains/System.keychain
 ```
 
-**Adım 2.** Şifrenizi girin.
+**Step 2.** Enter your password.
 
-**Adım 3.** (İsteğe bağlı) Tüm PQCert dosyalarını silmek için:
+**Step 3.** (Optional) To remove all PQCert files:
 
 ```bash
 rm -rf ~/.pqcert
 ```
 
-Proje klasöründeyken `make uninstall-ca` ve `make clean` da kullanılabilir (Makefile’da tanımlıysa).
+From the project folder you can also use `make uninstall-ca` and `make clean` if defined in the Makefile.
